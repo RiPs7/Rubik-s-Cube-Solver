@@ -62,6 +62,14 @@ public class MainSolver {
             cube.RotateBackCounterClockwise();
             frontier.add(new State(cube.RotateBackCounterClockwise()).setParent(current, "Back'"));
             cube.RotateBackClockwise();
+            frontier.add(new State(cube.RotateLeftClockwise()).setParent(current, "Left"));
+            cube.RotateLeftCounterClockwise();
+            frontier.add(new State(cube.RotateLeftCounterClockwise()).setParent(current, "Left'"));
+            cube.RotateLeftClockwise();
+            frontier.add(new State(cube.RotateRightClockwise()).setParent(current, "Right"));
+            cube.RotateRightCounterClockwise();
+            frontier.add(new State(cube.RotateRightCounterClockwise()).setParent(current, "Right'"));
+            cube.RotateRightClockwise();
             //8) Add current state in the closed set
             closed_set.add(current);
         }
@@ -78,7 +86,6 @@ public class MainSolver {
             //initialize an array for the returned solution
             String[] result = new String[solution.size()];
             return solution.toArray(result);
-
         } else {
             return new String[] {"No solution could be found"};
         }
