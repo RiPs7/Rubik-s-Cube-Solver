@@ -43,5 +43,7 @@ public class SolveActivity extends AppCompatActivity {
         if (!result.equals("")) {
             ((TextView) findViewById(R.id.solution)).setText("Solution steps: " + result.substring(0, result.length() - 2));
         }
+
+        //MainSolver.TestCases(getApplicationContext(), cube);
     }
 }

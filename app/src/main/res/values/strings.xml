@@ -14,4 +14,17 @@
     <string name="confirm_face">Has the current face been analyzed correctly?</string>
     <string name="confirm_yes">Yes</string>
     <string name="confirm_no">No</string>
+
+    <string name="front">Front</string>
+    <string name="front_inv">Front Inv</string>
+    <string name="back">Back</string>
+    <string name="back_inv">Back Inv</string>
+    <string name="up">Up</string>
+    <string name="up_inv">Up Inv</string>
+    <string name="bottom">Bottom</string>
+    <string name="bottom_inv">Bottom Inv</string>
+    <string name="left">Left</string>
+    <string name="left_inv">Left Inv</string>
+    <string name="right">Right</string>
+    <string name="right_inv">Right Inv</string>
 </resources>

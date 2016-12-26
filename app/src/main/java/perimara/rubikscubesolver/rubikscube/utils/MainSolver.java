@@ -1,11 +1,14 @@
 package perimara.rubikscubesolver.rubikscube.utils;
 
+import android.content.Context;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Queue;
 import java.util.Stack;
 
+import perimara.rubikscubesolver.R;
 import perimara.rubikscubesolver.rubikscube.Cube;
 import perimara.rubikscubesolver.rubikscube.State;
 
@@ -48,27 +51,27 @@ public class MainSolver {
             //after each children, the revert rotation is applied
             frontier.add(new State(cube.RotateBottomClockwise()).setParent(current, "Bottom"));
             cube.RotateBottomCounterClockwise();
-            frontier.add(new State(cube.RotateBottomCounterClockwise()).setParent(current, "Bottom'"));
+            frontier.add(new State(cube.RotateBottomCounterClockwise()).setParent(current, "Bottom Inverted"));
             cube.RotateBottomClockwise();
             frontier.add(new State(cube.RotateUpClockwise()).setParent(current, "Up"));
             cube.RotateUpCounterClockwise();
-            frontier.add(new State(cube.RotateUpCounterClockwise()).setParent(current, "Up'"));
+            frontier.add(new State(cube.RotateUpCounterClockwise()).setParent(current, "Up Inverted"));
             cube.RotateUpClockwise();
             frontier.add(new State(cube.RotateFrontClockwise()).setParent(current, "Front"));
             cube.RotateFrontCounterClockwise();
-            frontier.add(new State(cube.RotateFrontCounterClockwise()).setParent(current, "Front'"));
+            frontier.add(new State(cube.RotateFrontCounterClockwise()).setParent(current, "Front Inverted"));
             cube.RotateFrontClockwise();
             frontier.add(new State(cube.RotateBackClockwise()).setParent(current, "Back"));
             cube.RotateBackCounterClockwise();
-            frontier.add(new State(cube.RotateBackCounterClockwise()).setParent(current, "Back'"));
+            frontier.add(new State(cube.RotateBackCounterClockwise()).setParent(current, "Back Inverted"));
             cube.RotateBackClockwise();
             frontier.add(new State(cube.RotateLeftClockwise()).setParent(current, "Left"));
             cube.RotateLeftCounterClockwise();
-            frontier.add(new State(cube.RotateLeftCounterClockwise()).setParent(current, "Left'"));
+            frontier.add(new State(cube.RotateLeftCounterClockwise()).setParent(current, "Left Inverted"));
             cube.RotateLeftClockwise();
             frontier.add(new State(cube.RotateRightClockwise()).setParent(current, "Right"));
             cube.RotateRightCounterClockwise();
-            frontier.add(new State(cube.RotateRightCounterClockwise()).setParent(current, "Right'"));
+            frontier.add(new State(cube.RotateRightCounterClockwise()).setParent(current, "Right Inverted"));
             cube.RotateRightClockwise();
             //8) Add current state in the closed set
             closed_set.add(current);
@@ -80,7 +83,7 @@ public class MainSolver {
             Stack<String> solution = new Stack();
             //while the parent of the current state is not null...
             while (current.parent != null){
-                solution.push(current.actionFromParent);
+                solution.push(current.counterActionFromParent);
                 current = current.parent;
             }
             //initialize an array for the returned solution
@@ -90,6 +93,73 @@ public class MainSolver {
             return new String[] {"No solution could be found"};
         }
 
+    }
+
+    public static void TestCases(Context context, Cube cube){
+        System.out.println(new State(cube));
+
+        System.out.println(context.getResources().getString(R.string.back) + new State(cube.RotateBackClockwise()));
+
+        System.out.println(context.getResources().getString(R.string.back_inv) + new State(cube.RotateBackCounterClockwise()));
+
+        System.out.println(context.getResources().getString(R.string.front) + new State(cube.RotateFrontClockwise()));
+
+        System.out.println(context.getResources().getString(R.string.front_inv) + new State(cube.RotateFrontCounterClockwise()));
+
+        System.out.println(context.getResources().getString(R.string.up) + new State(cube.RotateUpClockwise()));
+
+        System.out.println(context.getResources().getString(R.string.up_inv) + new State(cube.RotateUpCounterClockwise()));
+
+        System.out.println(context.getResources().getString(R.string.bottom) + new State(cube.RotateBottomClockwise()));
+
+        System.out.println(context.getResources().getString(R.string.bottom_inv) + new State(cube.RotateBottomCounterClockwise()));
+
+        System.out.println(context.getResources().getString(R.string.left) + new State(cube.RotateLeftClockwise()));
+
+        System.out.println(context.getResources().getString(R.string.left_inv) + new State(cube.RotateLeftCounterClockwise()));
+
+        System.out.println(context.getResources().getString(R.string.right) + new State(cube.RotateRightClockwise()));
+
+        System.out.println(context.getResources().getString(R.string.right_inv) + new State(cube.RotateRightCounterClockwise()));
+
+    }
+
+    public static String[] SolveIDAStar(Cube cube){
+        //TODO TO BE IMPLEMENTED
+        /*
+         node              current node
+         g                 the cost to reach current node
+         f                 estimated cost of the cheapest path (root..node..goal)
+         h(node)           estimated cost of the cheapest path (node..goal)
+         cost(node, succ)  step cost function
+         is_goal(node)     goal test
+         successors(node)  node expanding function, expand nodes ordered by g + h(node)
+
+         procedure ida_star(root)
+           bound := h(root)
+           loop
+             t := search(root, 0, bound)
+             if t = FOUND then return bound
+             if t = ∞ then return NOT_FOUND
+             bound := t
+           end loop
+         end procedure
+
+         function search(node, g, bound)
+           f := g + h(node)
+           if f > bound then return f
+           if is_goal(node) then return FOUND
+           min := ∞
+           for succ in successors(node) do
+             t := search(succ, g + cost(node, succ), bound)
+             if t = FOUND then return FOUND
+             if t < min then min := t
+           end for
+           return min
+         end function
+         */
+
+        return null;
     }
 
 }
