@@ -31,19 +31,19 @@ public class SolveActivity extends AppCompatActivity {
             }
         }
 
-        String[] solution = MainSolver.Solve(cube);
-        String result = "";
-        for (String s : solution){
-            if (s.equals("V")){
-                continue;
-            }
-            result += s + ", ";
-        }
+//        String[] solution = MainSolver.Solve(cube);
+//        String result = "";
+//        for (String s : solution){
+//            if (s.equals("V")){
+//                continue;
+//            }
+//            result += s + ", ";
+//        }
+//
+//        if (!result.equals("")) {
+//            ((TextView) findViewById(R.id.solution)).setText("Solution steps: " + result.substring(0, result.length() - 2));
+//        }
 
-        if (!result.equals("")) {
-            ((TextView) findViewById(R.id.solution)).setText("Solution steps: " + result.substring(0, result.length() - 2));
-        }
-
-        //MainSolver.TestCases(getApplicationContext(), cube);
+        MainSolver.TestCases(getApplicationContext(), cube);
     }
 }

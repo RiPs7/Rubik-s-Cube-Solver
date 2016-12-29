@@ -123,8 +123,8 @@ public class Cube {
         this.faces[0].tiles[6] = this.faces[0].tiles[8];
         this.faces[0].tiles[7] = this.faces[0].tiles[5];
 
-        this.faces[0].tiles[8] = temp[0];
-        this.faces[0].tiles[5] = temp[1];
+        this.faces[0].tiles[8] = temp[1];
+        this.faces[0].tiles[5] = temp[0];
 
         return this;
     }
@@ -154,13 +154,13 @@ public class Cube {
         this.faces[4].tiles[5] = this.faces[0].tiles[1];
         this.faces[4].tiles[2] = this.faces[0].tiles[0];
 
-        this.faces[0].tiles[2] = this.faces[2].tiles[6];
+        this.faces[0].tiles[2] = this.faces[2].tiles[0];
         this.faces[0].tiles[1] = this.faces[2].tiles[3];
-        this.faces[0].tiles[0] = this.faces[2].tiles[0];
+        this.faces[0].tiles[0] = this.faces[2].tiles[6];
 
-        this.faces[2].tiles[6] = temp[0];
+        this.faces[2].tiles[0] = temp[0];
         this.faces[2].tiles[3] = temp[1];
-        this.faces[2].tiles[0] = temp[2];
+        this.faces[2].tiles[6] = temp[2];
 
         //Then store bottom face front tiles in temp to rotate bottom face
         temp = new Tile[2];
@@ -176,8 +176,8 @@ public class Cube {
         this.faces[1].tiles[6] = this.faces[1].tiles[8];
         this.faces[1].tiles[7] = this.faces[1].tiles[5];
 
-        this.faces[1].tiles[8] = temp[0];
-        this.faces[1].tiles[5] = temp[1];
+        this.faces[1].tiles[8] = temp[1];
+        this.faces[1].tiles[5] = temp[0];
 
         return this;
     }
@@ -229,8 +229,8 @@ public class Cube {
         this.faces[3].tiles[6] = this.faces[3].tiles[8];
         this.faces[3].tiles[7] = this.faces[3].tiles[5];
 
-        this.faces[3].tiles[8] = temp[0];
-        this.faces[3].tiles[5] = temp[1];
+        this.faces[3].tiles[8] = temp[1];
+        this.faces[3].tiles[5] = temp[0];
 
         return this;
     }
@@ -282,8 +282,8 @@ public class Cube {
         this.faces[4].tiles[7] = this.faces[4].tiles[5];
         this.faces[4].tiles[6] = this.faces[4].tiles[8];
 
-        this.faces[4].tiles[5] = temp[1];
-        this.faces[4].tiles[8] = temp[0];
+        this.faces[4].tiles[5] = temp[0];
+        this.faces[4].tiles[8] = temp[1];
 
         return this;
     }
@@ -335,8 +335,8 @@ public class Cube {
         this.faces[2].tiles[7] = this.faces[2].tiles[5];
         this.faces[2].tiles[6] = this.faces[2].tiles[8];
 
-        this.faces[2].tiles[5] = temp[1];
-        this.faces[2].tiles[8] = temp[0];
+        this.faces[2].tiles[5] = temp[0];
+        this.faces[2].tiles[8] = temp[1];
 
         return this;
     }

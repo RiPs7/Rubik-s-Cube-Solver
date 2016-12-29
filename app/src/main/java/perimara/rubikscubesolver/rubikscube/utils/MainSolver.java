@@ -49,36 +49,36 @@ public class MainSolver {
             }
             //6-7) Get children states and push them in the frontier
             //after each children, the revert rotation is applied
-            frontier.add(new State(cube.RotateBottomClockwise()).setParent(current, "Bottom"));
+            frontier.add(new State(cube.RotateBottomClockwise()).setParent(current, "Bottom Inverted"));
             cube.RotateBottomCounterClockwise();
-            frontier.add(new State(cube.RotateBottomCounterClockwise()).setParent(current, "Bottom Inverted"));
+            frontier.add(new State(cube.RotateBottomCounterClockwise()).setParent(current, "Bottom"));
             cube.RotateBottomClockwise();
-            frontier.add(new State(cube.RotateUpClockwise()).setParent(current, "Up"));
+            frontier.add(new State(cube.RotateUpClockwise()).setParent(current, "Up Inverted"));
             cube.RotateUpCounterClockwise();
-            frontier.add(new State(cube.RotateUpCounterClockwise()).setParent(current, "Up Inverted"));
+            frontier.add(new State(cube.RotateUpCounterClockwise()).setParent(current, "Up"));
             cube.RotateUpClockwise();
-            frontier.add(new State(cube.RotateFrontClockwise()).setParent(current, "Front"));
+            frontier.add(new State(cube.RotateFrontClockwise()).setParent(current, "Front Inverted"));
             cube.RotateFrontCounterClockwise();
-            frontier.add(new State(cube.RotateFrontCounterClockwise()).setParent(current, "Front Inverted"));
+            frontier.add(new State(cube.RotateFrontCounterClockwise()).setParent(current, "Front"));
             cube.RotateFrontClockwise();
-            frontier.add(new State(cube.RotateBackClockwise()).setParent(current, "Back"));
+            frontier.add(new State(cube.RotateBackClockwise()).setParent(current, "Back Inverted"));
             cube.RotateBackCounterClockwise();
-            frontier.add(new State(cube.RotateBackCounterClockwise()).setParent(current, "Back Inverted"));
+            frontier.add(new State(cube.RotateBackCounterClockwise()).setParent(current, "Back"));
             cube.RotateBackClockwise();
-            frontier.add(new State(cube.RotateLeftClockwise()).setParent(current, "Left"));
+            frontier.add(new State(cube.RotateLeftClockwise()).setParent(current, "Left Inverted"));
             cube.RotateLeftCounterClockwise();
-            frontier.add(new State(cube.RotateLeftCounterClockwise()).setParent(current, "Left Inverted"));
+            frontier.add(new State(cube.RotateLeftCounterClockwise()).setParent(current, "Left"));
             cube.RotateLeftClockwise();
-            frontier.add(new State(cube.RotateRightClockwise()).setParent(current, "Right"));
+            frontier.add(new State(cube.RotateRightClockwise()).setParent(current, "Right Inverted"));
             cube.RotateRightCounterClockwise();
-            frontier.add(new State(cube.RotateRightCounterClockwise()).setParent(current, "Right Inverted"));
+            frontier.add(new State(cube.RotateRightCounterClockwise()).setParent(current, "Right"));
             cube.RotateRightClockwise();
             //8) Add current state in the closed set
             closed_set.add(current);
         }
 
-        //if current state has been initialized...
-        if (current != null){
+        //if current state has been initialized and it is the same as the final state...
+        if (current != null && current.CheckFinalState()){
             //create a stack for backtracking from final state to root
             Stack<String> solution = new Stack();
             //while the parent of the current state is not null...
