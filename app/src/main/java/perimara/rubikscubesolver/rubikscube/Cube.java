@@ -350,5 +350,38 @@ public class Cube {
         return this;
     }
 
+    public Cube Algorithm(String seq){
+        String[] steps = seq.split(",");
+        for (String s : steps){
+            if (s.equals("D")){
+                RotateBottomClockwise();
+            } else if (s.equals("D'")){
+                RotateBottomCounterClockwise();
+            } else if (s.equals("F")){
+                RotateFrontClockwise();
+            } else if (s.equals("F'")){
+                RotateFrontCounterClockwise();
+            } else if (s.equals("R")){
+                RotateRightClockwise();
+            } else if (s.equals("R'")){
+                RotateRightCounterClockwise();
+            } else if (s.equals("B")){
+                RotateBackClockwise();
+            } else if (s.equals("B'")){
+                RotateBackCounterClockwise();
+            } else if (s.equals("L")){
+                RotateLeftClockwise();
+            } else if (s.equals("L'")){
+                RotateLeftCounterClockwise();
+            } else if (s.equals("U")){
+                RotateUpClockwise();
+            } else if (s.equals("U'")){
+                RotateUpCounterClockwise();
+            }
+            System.out.println(s + " ===> " + new State(this));
+        }
+        return this;
+    }
+
 
 }

@@ -73,11 +73,9 @@ public class State {
     }
 
     private int[] GetState(Cube cube){
-        int[] result = new int[cube.faces.length * cube.faces[0].tiles.length];
-        for (int i = 0; i < cube.faces.length; i++){
-            for (int j = 0; j < cube.faces[i].tiles.length; j++){
-                result[i * cube.faces[i].tiles.length + j] = cube.faces[i].tiles[j].color_index;
-            }
+        int[] result = new int[finalState.length];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = cube.faces[i / 9].tiles[i % 9].color_index;
         }
         return result;
     }

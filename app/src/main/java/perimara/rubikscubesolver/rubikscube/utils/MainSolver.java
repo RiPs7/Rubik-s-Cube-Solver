@@ -17,7 +17,7 @@ import perimara.rubikscubesolver.rubikscube.State;
  */
 public class MainSolver {
 
-    public static String[] Solve(Cube cube) {
+    public static String Solve(Cube cube) {
         //queue for the frontier
         Queue<State> frontier = new ArrayDeque();
         //arraylist for the closed set
@@ -49,30 +49,54 @@ public class MainSolver {
             }
             //6-7) Get children states and push them in the frontier
             //after each children, the revert rotation is applied
-            frontier.add(new State(cube.RotateBottomClockwise()).setParent(current, "Bottom Inverted"));
-            cube.RotateBottomCounterClockwise();
-            frontier.add(new State(cube.RotateBottomCounterClockwise()).setParent(current, "Bottom"));
-            cube.RotateBottomClockwise();
-            frontier.add(new State(cube.RotateUpClockwise()).setParent(current, "Up Inverted"));
-            cube.RotateUpCounterClockwise();
-            frontier.add(new State(cube.RotateUpCounterClockwise()).setParent(current, "Up"));
-            cube.RotateUpClockwise();
-            frontier.add(new State(cube.RotateFrontClockwise()).setParent(current, "Front Inverted"));
-            cube.RotateFrontCounterClockwise();
-            frontier.add(new State(cube.RotateFrontCounterClockwise()).setParent(current, "Front"));
-            cube.RotateFrontClockwise();
-            frontier.add(new State(cube.RotateBackClockwise()).setParent(current, "Back Inverted"));
-            cube.RotateBackCounterClockwise();
-            frontier.add(new State(cube.RotateBackCounterClockwise()).setParent(current, "Back"));
-            cube.RotateBackClockwise();
-            frontier.add(new State(cube.RotateLeftClockwise()).setParent(current, "Left Inverted"));
-            cube.RotateLeftCounterClockwise();
-            frontier.add(new State(cube.RotateLeftCounterClockwise()).setParent(current, "Left"));
-            cube.RotateLeftClockwise();
-            frontier.add(new State(cube.RotateRightClockwise()).setParent(current, "Right Inverted"));
-            cube.RotateRightCounterClockwise();
-            frontier.add(new State(cube.RotateRightCounterClockwise()).setParent(current, "Right"));
-            cube.RotateRightClockwise();
+            if (!current.actionFromParent.equals("Bottom")) {
+                frontier.add(new State(cube.RotateBottomClockwise()).setParent(current, "Bottom"));
+                cube.RotateBottomCounterClockwise();
+            }
+            if (!current.actionFromParent.equals("Bottom Inverted")) {
+                frontier.add(new State(cube.RotateBottomCounterClockwise()).setParent(current, "Bottom Inverted"));
+                cube.RotateBottomClockwise();
+            }
+            if (!current.actionFromParent.equals("Up")) {
+                frontier.add(new State(cube.RotateUpClockwise()).setParent(current, "Up"));
+                cube.RotateUpCounterClockwise();
+            }
+            if (!current.actionFromParent.equals("Up Inverted")) {
+                frontier.add(new State(cube.RotateUpCounterClockwise()).setParent(current, "Up Inverted"));
+                cube.RotateUpClockwise();
+            }
+            if (!current.actionFromParent.equals("Front")) {
+                frontier.add(new State(cube.RotateFrontClockwise()).setParent(current, "Front"));
+                cube.RotateFrontCounterClockwise();
+            }
+            if (!current.actionFromParent.equals("Front Inverted")) {
+                frontier.add(new State(cube.RotateFrontCounterClockwise()).setParent(current, "Front Inverted"));
+                cube.RotateFrontClockwise();
+            }
+            if (!current.actionFromParent.equals("Back")) {
+                frontier.add(new State(cube.RotateBackClockwise()).setParent(current, "Back"));
+                cube.RotateBackCounterClockwise();
+            }
+            if (!current.actionFromParent.equals("Back Inverted")) {
+                frontier.add(new State(cube.RotateBackCounterClockwise()).setParent(current, "Back Inverted"));
+                cube.RotateBackClockwise();
+            }
+            if (!current.actionFromParent.equals("Left")) {
+                frontier.add(new State(cube.RotateLeftClockwise()).setParent(current, "Left"));
+                cube.RotateLeftCounterClockwise();
+            }
+            if (!current.actionFromParent.equals("Left Inverted")) {
+                frontier.add(new State(cube.RotateLeftCounterClockwise()).setParent(current, "Left Inverted"));
+                cube.RotateLeftClockwise();
+            }
+            if (!current.actionFromParent.equals("Right")) {
+                frontier.add(new State(cube.RotateRightClockwise()).setParent(current, "Right"));
+                cube.RotateRightCounterClockwise();
+            }
+            if (!current.actionFromParent.equals("Right Inverted")) {
+                frontier.add(new State(cube.RotateRightCounterClockwise()).setParent(current, "Right Inverted"));
+                cube.RotateRightClockwise();
+            }
             //8) Add current state in the closed set
             closed_set.add(current);
         }
@@ -87,41 +111,39 @@ public class MainSolver {
                 current = current.parent;
             }
             //initialize an array for the returned solution
-            String[] result = new String[solution.size()];
-            return solution.toArray(result);
+            String[] result_arr = new String[solution.size()];
+            solution.toArray(result_arr);
+            String result = "";
+            for (String s : result_arr){
+                if (s.equals("V")){
+                    continue;
+                }
+                result += s + ", ";
+            }
+            return result.substring(0, result.length() - 2);
         } else {
-            return new String[] {"No solution could be found"};
+            return "No solution could be found";
         }
-
     }
 
     public static void TestCases(Context context, Cube cube){
         System.out.println(new State(cube));
-
         System.out.println(context.getResources().getString(R.string.back) + new State(cube.RotateBackClockwise()));
-
         System.out.println(context.getResources().getString(R.string.back_inv) + new State(cube.RotateBackCounterClockwise()));
-
         System.out.println(context.getResources().getString(R.string.front) + new State(cube.RotateFrontClockwise()));
-
         System.out.println(context.getResources().getString(R.string.front_inv) + new State(cube.RotateFrontCounterClockwise()));
-
         System.out.println(context.getResources().getString(R.string.up) + new State(cube.RotateUpClockwise()));
-
         System.out.println(context.getResources().getString(R.string.up_inv) + new State(cube.RotateUpCounterClockwise()));
-
         System.out.println(context.getResources().getString(R.string.bottom) + new State(cube.RotateBottomClockwise()));
-
         System.out.println(context.getResources().getString(R.string.bottom_inv) + new State(cube.RotateBottomCounterClockwise()));
-
         System.out.println(context.getResources().getString(R.string.left) + new State(cube.RotateLeftClockwise()));
-
         System.out.println(context.getResources().getString(R.string.left_inv) + new State(cube.RotateLeftCounterClockwise()));
-
         System.out.println(context.getResources().getString(R.string.right) + new State(cube.RotateRightClockwise()));
-
         System.out.println(context.getResources().getString(R.string.right_inv) + new State(cube.RotateRightCounterClockwise()));
+    }
 
+    public static void TestAlgorithm(Cube cube, String algorithm){
+        System.out.println(new State(cube.Algorithm(algorithm)));
     }
 
     public static String[] SolveIDAStar(Cube cube){
