@@ -48,52 +48,79 @@ public class MainSolver {
                 continue;
             }
             //6-7) Get children states and push them in the frontier
-            //after each children, the revert rotation is applied
-            if (!current.actionFromParent.equals("Bottom")) {
+            //apply the corresponding rotation to get the cube to the current state
+            if (current.actionFromParent.equals("Bottom Inverted")) {
+                cube.RotateBottomClockwise();
+            } else if (current.actionFromParent.equals("Bottom")) {
+                cube.RotateBottomCounterClockwise();
+            } else if (current.actionFromParent.equals("Up Inverted")) {
+                cube.RotateUpClockwise();
+            } else if (current.actionFromParent.equals("Up")) {
+                cube.RotateUpCounterClockwise();
+            } else if (current.actionFromParent.equals("Front Inverted")) {
+                cube.RotateFrontClockwise();
+            } else if (current.actionFromParent.equals("Front")) {
+                cube.RotateFrontCounterClockwise();
+            } else if (current.actionFromParent.equals("Back Inverted")) {
+                cube.RotateBackClockwise();
+            } else if (current.actionFromParent.equals("Back")) {
+                cube.RotateBackCounterClockwise();
+            } else if (current.actionFromParent.equals("Left Inverted")) {
+                cube.RotateLeftClockwise();
+            } else if (current.actionFromParent.equals("Left")) {
+                cube.RotateLeftCounterClockwise();
+            } else if (current.actionFromParent.equals("Right Inverted")) {
+                cube.RotateRightClockwise();
+            } else if (current.actionFromParent.equals("Right")) {
+                cube.RotateRightCounterClockwise();
+            }
+            //and after each child is generated, the revert rotation is applied
+            //(Note: there is no need to apply the counter rotation of the rotation applied to get to the current state)
+            if (!current.actionFromParent.equals("Bottom Inverted")) {
                 frontier.add(new State(cube.RotateBottomClockwise()).setParent(current, "Bottom"));
                 cube.RotateBottomCounterClockwise();
             }
-            if (!current.actionFromParent.equals("Bottom Inverted")) {
+            if (!current.actionFromParent.equals("Bottom")) {
                 frontier.add(new State(cube.RotateBottomCounterClockwise()).setParent(current, "Bottom Inverted"));
                 cube.RotateBottomClockwise();
             }
-            if (!current.actionFromParent.equals("Up")) {
+            if (!current.actionFromParent.equals("Up Inverted")) {
                 frontier.add(new State(cube.RotateUpClockwise()).setParent(current, "Up"));
                 cube.RotateUpCounterClockwise();
             }
-            if (!current.actionFromParent.equals("Up Inverted")) {
+            if (!current.actionFromParent.equals("Up")) {
                 frontier.add(new State(cube.RotateUpCounterClockwise()).setParent(current, "Up Inverted"));
                 cube.RotateUpClockwise();
             }
-            if (!current.actionFromParent.equals("Front")) {
+            if (!current.actionFromParent.equals("Front Inverted")) {
                 frontier.add(new State(cube.RotateFrontClockwise()).setParent(current, "Front"));
                 cube.RotateFrontCounterClockwise();
             }
-            if (!current.actionFromParent.equals("Front Inverted")) {
+            if (!current.actionFromParent.equals("Front")) {
                 frontier.add(new State(cube.RotateFrontCounterClockwise()).setParent(current, "Front Inverted"));
                 cube.RotateFrontClockwise();
             }
-            if (!current.actionFromParent.equals("Back")) {
+            if (!current.actionFromParent.equals("Back Inverted")) {
                 frontier.add(new State(cube.RotateBackClockwise()).setParent(current, "Back"));
                 cube.RotateBackCounterClockwise();
             }
-            if (!current.actionFromParent.equals("Back Inverted")) {
+            if (!current.actionFromParent.equals("Back")) {
                 frontier.add(new State(cube.RotateBackCounterClockwise()).setParent(current, "Back Inverted"));
                 cube.RotateBackClockwise();
             }
-            if (!current.actionFromParent.equals("Left")) {
+            if (!current.actionFromParent.equals("Left Inverted")) {
                 frontier.add(new State(cube.RotateLeftClockwise()).setParent(current, "Left"));
                 cube.RotateLeftCounterClockwise();
             }
-            if (!current.actionFromParent.equals("Left Inverted")) {
+            if (!current.actionFromParent.equals("Left")) {
                 frontier.add(new State(cube.RotateLeftCounterClockwise()).setParent(current, "Left Inverted"));
                 cube.RotateLeftClockwise();
             }
-            if (!current.actionFromParent.equals("Right")) {
+            if (!current.actionFromParent.equals("Right Inverted")) {
                 frontier.add(new State(cube.RotateRightClockwise()).setParent(current, "Right"));
                 cube.RotateRightCounterClockwise();
             }
-            if (!current.actionFromParent.equals("Right Inverted")) {
+            if (!current.actionFromParent.equals("Right")) {
                 frontier.add(new State(cube.RotateRightCounterClockwise()).setParent(current, "Right Inverted"));
                 cube.RotateRightClockwise();
             }
@@ -107,7 +134,7 @@ public class MainSolver {
             Stack<String> solution = new Stack();
             //while the parent of the current state is not null...
             while (current.parent != null){
-                solution.push(current.counterActionFromParent);
+                solution.push(current.actionFromParent);
                 current = current.parent;
             }
             //initialize an array for the returned solution

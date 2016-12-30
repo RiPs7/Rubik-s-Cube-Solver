@@ -35,6 +35,15 @@
                 android:layout_centerInParent="true"
                 android:src="@drawable/ic_action_camera" />
 
+            <Button
+                android:id="@+id/resetBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reset"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="20dp"/>
+
         </RelativeLayout>
 
         <SurfaceView

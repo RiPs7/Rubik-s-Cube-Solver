@@ -38,7 +38,7 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
     int x_offset = 0, y_offset = 0;
     int step = 1;
 
-    Cube cube = new Cube();
+    Cube cube;
     Face f;
 
     @Override
@@ -47,6 +47,8 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
         setContentView(R.layout.activity_camera);
 
         ButterKnife.inject(this);
+
+        cube = new Cube();
 
         surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(this);
@@ -115,6 +117,15 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
                     }
                     startActivity(intent);
                 }
+            }
+        });
+
+        findViewById(R.id.resetBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                step = 1;
+                cube = new Cube();
+                ((TextView)findViewById(R.id.hint)).setText(R.string.hint_white);
             }
         });
 
